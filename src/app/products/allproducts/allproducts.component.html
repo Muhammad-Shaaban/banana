@@ -1,0 +1,112 @@
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<section class="container">
+  <h1 class="text-muted text-center text-capitalize">{{ 'prodInfo' | translate }}</h1><hr>
+   <div class="row">
+       <div class="col">
+           <!-- Filters and delete -->
+           <section class="filterAndDelete">
+              <!--<button class="btn btn-outline-danger btn-block ml-auto" style="width: 20%" (click)="deleteProdcut()">{{ 'DeleteSelected' | translate }}</button>-->
+              <h3 class="text-center text-muted mt-3 mb-2">{{ 'FilterBy' | translate }} : </h3><hr>
+              <div class="row mt-5">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <select class="custom-select" [(ngModel)]="service.filterdCategory" data-toggle="tooltip" data-placement="top" title="Category">
+                      <option value="F-M">{{ 'M_F' | translate}}</option>
+                      <option value="F-V">{{ 'F_V' | translate }}</option>
+                      <option value="B">{{ 'B' | translate}}</option>
+                      <option value="F">{{ 'F' | translate}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <button class="custom-select" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <span class="text-white" title="Filter By Product Type" data-toggle="tooltip" data-placement="top">Product Type</span>
+                  </button>
+                  <div class="collapse border" id="collapseExample" style="width: 100%;">
+                    <form >
+                      <div class="form-group" *ngFor="let item of allProductType">
+                        <input type="checkbox" value="{{ item.value }}" id="{{ item.value }}" class="mr-2" (change)="onProductTypeCheckBoxChabge($event)">
+                        <label for="{{ item.value }}">{{ item.name }}</label>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group mt-2">
+                    <label for="dateFilter" class="text-muted font-weight-bold mr-2">{{ 'Date' | translate }}</label>
+                    <input type="checkbox" id="dateFilter" class="mr-5" (change)="onDatefilterChange($event)">
+                    <label for="bestSellerFilter" class="text-muted font-weight-bold mr-2">{{ 'Bestseller' | translate }}</label>
+                    <input type="checkbox" id="bestSellerFilter" (change)="onSoldfilterChange($event)" >
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <button class="btn btn-outline-secondary font-weight-bold" (click)="filter()">{{ 'Filter' | translate }}</button>
+                </div>
+              </div>
+           </section>
+
+
+           <form [formGroup]="form" style="width: 100%;margin: 0;">
+            <table class="table table-bordered mt-4">
+              <thead class="thead-dark">
+                  <tr>
+                      <th>#</th>
+                      <th>{{ 'prod_name_en' | translate}} (EN)</th>
+                      <th>{{ 'prod_name_en' | translate}} (AR)</th>
+                      <th>{{ 'prod_name_en' | translate}} (Urdu)</th>
+                      <th>{{ 'prod_type' | translate}}</th>
+                      <th>{{ 'prod_Category' | translate}}</th>
+                      <th>{{ 'prod_img' | translate}}</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of allProducts">
+                      <td>
+                        <input type="checkbox" name="productId" [value]="item._id" (change)="onCheckboxChange($event)">
+                      </td>
+                      <td>{{ item.name_en }}</td>
+                      <td>{{ item.name_ar }}</td>
+                      <td>{{ item.name_urdu }}</td>
+                      <td>{{ item.productType }}</td>
+                      <td>{{ item.category }}</td>
+                      <td>
+                          <img src="https://banana-api-1.herokuapp.com/{{item.imageUrl}}" width="100" height="100" alt="" class="d-block m-auto">
+                      </td>
+                      <td>
+                          <a routerLink="/products/edit/{{item._id}}" title="Edit"  class="btn btn-outline-success mr-1"><i class="fas fa-pen"></i></a>
+                      </td>
+                  </tr>
+              </tbody>
+            </table>
+           </form>
+
+           <!--Pagination-->
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <button class="page-link" (click) = "goPrev()" [disabled]="service.pageNumber <= 1">{{ 'Previous' | translate}}</button>
+            </li>
+
+            <li class="page-item" *ngFor="let page of paginationGenerate(totalPages)">
+              <button class="page-link" (click)="getNextPage(page)">{{ page }}</button>
+            </li>
+
+            <li class="page-item" *ngIf="showNextandPrev">
+              <span class="page-link">...</span>
+            </li>
+
+            <li class="page-item">
+              <button class="page-link" (click)="goNext()" [disabled]="service.pageNumber >= totalPages">{{ 'Next' | translate}}</button>
+            </li>
+          </ul>
+
+           <!-- Add New Product -->
+           <a routerLink="/products/addProduct" class="addNew btn btn-green font-weight-bold mb-3"><i class="fas fa-plus mr-2"></i>{{ 'New_Product'| translate }}</a>
+
+       </div>
+   </div>
+</section>

@@ -1,0 +1,71 @@
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<h1 class="text-center text-muted text-capitalize mb-3">{{'all sellers' | translate}}</h1><hr>
+<!-- Search -->
+<div class="row">
+  <div class="col">
+    <form #form="ngForm" autocomplete="off" (submit)="sellerSearch()">
+     <div class="row">
+       <div class="col-md-9">
+        <div class="form-group">
+          <input type="search" class="form-control" placeholder="Search..." [(ngModel)] = "service.searchQuery" #searchQuery="ngModel" name="searchQuery">
+        </div>
+       </div>
+       <div class="col-md-2 offset-md-1">
+          <input type="submit" value="Search" class="btn btn-primary">
+       </div>
+     </div>
+    </form>
+  </div>
+</div>
+
+  <table class="table" style="margin-top: 2%;">
+    <thead class="thead-dark">
+      <th>{{'Name' | translate}}</th>
+      <th>{{'Email' | translate}}</th>
+      <th>{{'Phone Number' | translate}}</th>
+      <th>{{'# Of Category' | translate}} </th>
+      <th>{{'Verified' | translate}}</th>
+      <th>Expaired at</th>
+      <th>{{'Action' | translate}}</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of sellers" >
+        <td (click)="sellerInfo(item._id)" style="cursor: pointer;">{{ item.name }}</td>
+        <td (click)="sellerInfo(item._id)" style="cursor: pointer;">{{ item.email }}</td>
+        <td (click)="sellerInfo(item._id)" style="cursor: pointer;"> <span class="font-weight-bold">{{ item.code }}</span></td><!--{{ item.mobile }}-->
+        <td (click)="sellerInfo(item._id)" style="cursor: pointer;">{{ item.category.length }}</td>
+        <td (click)="sellerInfo(item._id)" style="cursor: pointer;">
+          <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item.verfication"></i>
+          <i class="fas fa-times text-danger" *ngIf="!item.verfication"></i>
+        </td>
+        <td>{{ item.certificate.expiresAt | date }}</td>
+        <td>
+          <button type="button" (click)="BlockorUnBlock(item._id)" class="btn btn-success font-weight-bold" *ngIf="item.blocked == false; else unblockuser">Block</button>
+
+          <ng-template #unblockuser>
+            <button type="button" (click)="BlockorUnBlock(item._id)" class="btn btn-danger font-weight-bold">UnBlock</button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!--Pagination-->
+<ul class="pagination justify-content-center">
+  <li class="page-item">
+    <button class="page-link" (click) = "goPrev()" [disabled]="service.searchPageNumber <= 1">{{ 'Previous' | translate}}</button>
+  </li>
+
+  <li class="page-item" *ngFor="let page of paginationGenerate(totalPages)">
+    <button class="page-link" (click)="getNextPage(page)">{{ page }}</button>
+  </li>
+
+  <li class="page-item" *ngIf="showNextandPrev">
+    <span class="page-link">...</span>
+  </li>
+
+  <li class="page-item">
+    <button class="page-link" (click)="goNext()" [disabled]="service.searchPageNumber >= totalPages">{{ 'Next' | translate}}</button>
+  </li>
+</ul>

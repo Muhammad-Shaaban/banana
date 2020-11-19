@@ -1,0 +1,25 @@
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<h1 class="text-center text-muted text-capitalize mb-3">{{'all certificates' | translate}}</h1><hr>
+<table class="table" style="margin-top: 10%;">
+    <thead class="thead-dark">
+      <th>{{'Owner' | translate}}</th>
+      <th>{{'Email' | translate}}</th>
+      <th>{{'Phone Number' | translate}}</th>
+      <th>{{'# Of Category'  | translate}}</th>
+      <th>{{'Activated'  |translate}}</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of certificates" (click)="getSingleCertificate(item._id)" style="cursor: pointer;">
+        <td>{{ item.name }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.mobile }}</td>
+        <td>{{ item.category.length }}</td>
+        <td>
+          <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item.activated"></i>
+          <i class="fas fa-times text-danger" *ngIf="item.activated == false"></i>
+        </td>
+
+      </tr>
+    </tbody>
+</table>

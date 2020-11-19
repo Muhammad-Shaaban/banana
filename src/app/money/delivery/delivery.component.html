@@ -1,0 +1,14 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'banana delivery' | translate}}</h1><hr>
+
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+
+<section class="container">
+  <div class="row">
+    <div class="col p-4 border border-silver">
+      <h3 class="text-capitalize text-muted">delivery ID : {{ allBananaDelivery.data._id }}</h3>
+      <h3 class="text-capitalize text-muted mt-5">delivery price : {{ allBananaDelivery.data.price }}</h3>
+    </div>
+  </div>
+  <button class="btn btn-outline-danger d-block ml-auto font-weight-bold mt-4" (click)="updatePrice()">{{'Update Price' | translate}}</button>
+</section>

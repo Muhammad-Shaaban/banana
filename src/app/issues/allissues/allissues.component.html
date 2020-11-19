@@ -1,0 +1,135 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'all issues' | translate}}</h1><hr>
+
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<!-- Add isse reason -->
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-info font-weight-bold btn-block mb-4 text-center" (click)="addIssueReason()">{{'add new issue reason' | translate}}</button>
+  </div>
+</div>
+
+<!-- Folter types -->
+<div class="row">
+  <div class="col-md-5">
+    <select class="form-control" [(ngModel)]="service.filterType" #filterType="ngModel" name="filterType">
+      <option selected disabled class="font-weight-bold">Chooser Issue Type </option>
+      <option value="ok">Ok</option>
+      <option value="binding">Binding</option>
+      <option value="cancel">Cancel</option>
+    </select>
+  </div>
+  <div class="col-md-5">
+    <select class="form-control" [(ngModel)]="service.reasonID" #reasonID="ngModel" name="reasonID">
+      <option selected disabled class="font-weight-bold">Chooser Issue Reason </option>
+      <option *ngFor="let item of allIssuesReasons" [value]="item._id">{{ item.reason_ar }}</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button type="button" class="btn btn-success font-weight-bold" (click)="filterIssues(filterType.value, reasonID.value)">{{'Filter' | translate}}</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 p-4 border mb-5 mt-5" *ngFor="let item of allIssues">
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">State</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{ item.state }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Issue ID</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{ item._id }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Order ID</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{ item.order }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Reason</label>
+      </div>
+      <div class="col-md-8">
+        <span>EN: {{ item.reason.reason_en }}</span> <span class="ml-4"> AR: {{ item.reason.reason_ar }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Demands</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{ item.demands }}</span>
+      </div>
+    </div>
+
+    <h4 class="text-center text-muted text-capitalize mt-3 mb-3 border p-3">Offer Information</h4>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">selected</label>
+      </div>
+      <div class="col-md-8">
+          <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item.offer.selected"></i>
+          <i class="fas fa-times text-danger" *ngIf="item.offer.selected == false"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Offer ID</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{ item.offer._id }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Delivery</label>
+      </div>
+      <div class="col-md-8">
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item.offer.banana_delivery"></i>
+        <i class="fas fa-times text-danger" *ngIf="item.offer.banana_delivery == false"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Price</label>
+      </div>
+      <div class="col-md-8">
+          <span>{{ item.offer.price }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Offer Products</label>
+      </div>
+      <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-4" *ngFor="let item2 of item.offer.offerProducts">
+              <div class="list-group">
+                <span class="list-group-item list-group-item-action font-weight-bold active" style="font-size: 14px;">Offer Prod.ID: {{ item2._id }}</span>
+                <span class="list-group-item list-group-item-action font-weight-bold" style="font-size: 14px;">Cart Item ID: {{ item2.cartItem }}</span>
+                <span class="list-group-item list-group-item-action font-weight-bold" style="font-size: 14px;">Prod.ID: {{ item2.product }}</span>
+                <span class="list-group-item list-group-item-action font-weight-bold">Amount: {{ item2.amount }} {{ item2.unit }}</span>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-success font-weight-bold" (click)="getSingleIssue(item._id)">{{'More Details' | translate}}</button>
+  </div>
+</div>
+
+
+
+

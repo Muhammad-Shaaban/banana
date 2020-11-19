@@ -1,0 +1,227 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'single order info' | translate}}</h1><hr>
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<section>
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Order ID</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ orderInfo._id }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Client</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ orderInfo.client.name }}</span>
+      <span style="margin-left: 10px;margin-right: 10px;"> and (his / her) phone is </span>
+      <span class="font-weight-bold">{{ orderInfo.client.mobile }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Categories</label>
+    </div>
+    <div class="col-md-8">
+      <span *ngFor="let item of orderInfo.category">{{ item }}, </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Status</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ orderInfo.status }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Pay</label>
+    </div>
+    <div class="col-md-8">
+      <span>
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="orderInfo.pay"></i>
+        <i class="fas fa-check text-times" *ngIf="orderInfo.pay == false"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Rated</label>
+    </div>
+    <div class="col-md-8">
+      <span>
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="orderInfo.reted"></i>
+        <i class="fas fa-times text-danger" *ngIf="orderInfo.reted == false"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Location</label>
+    </div>
+    <div class="col-md-8">
+      <a  target="_blank" href="https://maps.google.com/?q={{ orderInfo.location.coordinates[1] }},{{ orderInfo.location.coordinates[0] }}">{{ orderInfo.locationDetails.stringAdress }}</a>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Prodcuts</label>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-4 mt-3" *ngFor="let item2 of orderInfo.products">
+          <ul class="list-group">
+            <li class="list-group-item active" style="font-size: 15px;">{{ item2.product._id }}</li>
+            <li class="list-group-item">{{ item2.product.name_en }}</li>
+            <li class="list-group-item">{{ item2.product.name_ar }}</li>
+            <li class="list-group-item">{{ item2.amount }}  {{ item2.unit }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> <hr>
+
+  <h3 class="text-muted text-center mt-4 mb-3 border-bottom pb-4">Selected Offer</h3>
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Status</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ selectedOfferInfo.status }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Seller</label>
+    </div>
+    <div class="col-md-8">
+      <a routerLink="/seller/singleSeller/{{ selectedOfferInfo.seller._id }}">{{ selectedOfferInfo.seller.name }}</a>
+      <span style="margin-left: 10px;margin-right: 10px;"> and (his / her) phone is </span>
+      <span class="font-weight-bold">{{ selectedOfferInfo.seller.mobile }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Delivery</label>
+    </div>
+    <div class="col-md-8">
+      <span>
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="selectedOfferInfo.banana_delivery"></i>
+        <i class="fas fa-times text-danger" *ngIf="selectedOfferInfo.banana_delivery == false"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Price</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ selectedOfferInfo.price }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Location</label>
+    </div>
+    <div class="col-md-8">
+      <a  target="_blank" href="https://maps.google.com/?q={{ selectedOfferInfo.location.coordinates[1] }},{{ selectedOfferInfo.location.coordinates[0] }}">location</a>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Offer Products</label>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-4 mt-3" *ngFor="let item3 of selectedOfferInfo.offerProducts">
+          <ul class="list-group">
+            <li class="list-group-item active" style="font-size: 15px;">{{ item3._id }}</li>
+            <li class="list-group-item">Cart Item : <span style="font-size: 15px;"> {{ item3.cartItem}}</span></li>
+            <li class="list-group-item">{{ item3.product.name_en }}</li>
+            <li class="list-group-item">{{ item3.product.name_ar }}</li>
+            <li class="list-group-item">{{ item3.amount }}  {{ item3.unit }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> <hr>
+
+  <h3 class="text-muted text-center mt-4 mb-3 border-bottom pb-4">Payment Info</h3>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Payment ID</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ paymentInfo._id }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Payment Method</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ paymentInfo.method }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Payment Deliver</label>
+    </div>
+    <div class="col-md-8">
+      <span>
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="paymentInfo.deliver"></i>
+        <i class="fas fa-times text-danger" *ngIf="paymentInfo.deliver == false"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Payment Cancel</label>
+    </div>
+    <div class="col-md-8">
+      <span>
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="paymentInfo.cancel"></i>
+        <i class="fas fa-times text-danger" *ngIf="paymentInfo.cancel == false"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Client for Payment</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ paymentInfo.client.name }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label class="text-muted font-weight-bold mr-5">Seller for Payment</label>
+    </div>
+    <div class="col-md-8">
+      <span>{{ paymentInfo.seller.name }}</span>
+    </div>
+  </div>
+
+</section>

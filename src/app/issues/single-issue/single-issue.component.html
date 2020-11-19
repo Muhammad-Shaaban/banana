@@ -1,0 +1,69 @@
+<h1 class="text-center text-muted text-capitalize mb-3"> {{'single issue details' | translate}}</h1><hr>
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<div class="row">
+  <div class="col-md-5">
+    <div id="carouselExampleControls_{{ issueData.issue._id }}" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <img src="https://bookingbackendv1.herokuapp.com/images/{{ issueData.issue.imageUrl[0] }}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" *ngFor="let item2 of issueData.issue.imageUrl">
+          <img src="https://bookingbackendv1.herokuapp.com/images/{{ item2 }}" class="d-block w-100" alt="...">
+        </div>
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls_{{ issueData.issue._id }}" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls_{{ issueData.issue._id }}" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <p class="text-muted">State : <span class="font-weight-bold">{{ issueData.issue.state }}</span></p>
+    <p class="text-muted">Admin State : <span class="font-weight-bold text-success">{{ issueData.issue.adminState }}</span></p>
+    <p class="text-muted">Client : <a class="font-weight-bold" routerLink="/clients/singleClient/{{ issueData.issue.client.name }}/{{ issueData.issue.client._id }}">{{ issueData.issue.client.name }}</a></p>
+
+    <div class="list-group">
+      <span class="text-muted">Order Details :</span>
+      <span class="list-group-item list-group-item-action active"> Order ID : {{ issueData.issue.order._id }}</span>
+      <span class="list-group-item list-group-item-action" *ngFor="let item of issueData.issue.order.products">
+        <p>Product Name(EN) : <span class="text-muted font-weight-bold">{{ item.product.name_en }}</span></p>
+        <p>Product Name(AR) : <span class="text-muted font-weight-bold">{{ item.product.name_ar }}</span></p>
+        <p>Amount : <span class="text-muted font-weight-bold">{{ item.amount }} {{ item.unit }}</span></p>
+      </span>
+    </div>
+
+    <p class="text-muted mt-3">Reason ID : <span class="font-weight-bold">{{ issueData.issue.reason._id }}</span></p>
+    <p class="text-muted mt-3">Demand : <span class="font-weight-bold">{{ issueData.issue.demands }}</span></p>
+    <p class="text-muted mt-3">Seller Name : <a class="font-weight-bold" routerLink="/seller/singleSeller/{{ issueData.issue.seller._id }}">{{ issueData.issue.seller.name }}</a></p>
+
+    <div class="list-group mb-5">
+      <span class="text-muted">Payment Details :</span>
+      <span class="list-group-item list-group-item-action active">Payment ID : {{ issueData.PaymentTransaction._id }}</span>
+      <span class="list-group-item list-group-item-action">
+        Payment Method : {{ issueData.PaymentTransaction.method }}
+        <button type="button" class="btn btn-dark font-weight-bold" (click)="moreInfoAboutVisa(issueData.PaymentTransaction.payId)" *ngIf="issueData.PaymentTransaction.method === 'visa'" style="margin-left: 50%;">Information</button>
+      </span>
+      <span class="list-group-item list-group-item-action ">Deliver : {{ issueData.PaymentTransaction.deliver }}</span>
+      <span class="list-group-item list-group-item-action ">Arrive in : {{ issueData.PaymentTransaction.arriveIn | date }}</span>
+      <span class="list-group-item list-group-item-action ">Cancel : {{ issueData.PaymentTransaction.cancel }}</span>
+      <span class="list-group-item list-group-item-action ">Refund : {{ issueData.PaymentTransaction.refund }}</span>
+    </div>
+
+    <!-- Accept or disapprove issue -->
+    <div class="row mb-5">
+      <div class="col">
+        <button type="button" class="btn btn-success" (click)="approveIssue(issueData.issue._id, issueData.issue.offer.price)">{{'Approve Issue' | translate}}</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-danger" (click)="disapproveIssue(issueData.issue._id)">{{'Disapprove Issue' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

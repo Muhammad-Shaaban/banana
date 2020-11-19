@@ -1,0 +1,152 @@
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+
+<h4 class="text-center text-muted text-capitalize mb-3 border-bottom pb-4">{{'all transaction for' | translate}} <span class="font-weight-bold">{{clientName}}</span></h4>
+
+<div class="row">
+  <div class="col-md-4">
+    <label class="text-muted font-weight-bold mr-5">Wallet</label>
+  </div>
+  <div class="col-md-8">
+    <span>{{ singleClient.client.wallet }}</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <label class="text-muted font-weight-bold mr-5">User Name</label>
+  </div>
+  <div class="col-md-8">
+    <span>{{ singleClient.client.name }}</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <label class="text-muted font-weight-bold mr-5">Email</label>
+  </div>
+  <div class="col-md-8">
+    <span>{{ singleClient.client.email }}</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <label class="text-muted font-weight-bold mr-5">Phone Number</label>
+  </div>
+  <div class="col-md-8">
+    <span><span class="font-weight-bold">+{{ singleClient.client.code }}</span> {{ singleClient.client.mobile }}</span>
+  </div>
+</div>
+
+<!--<button type="button" class="btn btn-primary font-weight-bold mt-3 ml-1" (click)="sendNotifiy(singleClient.client._id)">Send Notification</button>-->
+
+<div class="row">
+  <div class="clientInfo mt-5 mb-4" *ngFor="let item of singleClient.clientWalletTransActions">
+    <div class="col-md-4">
+      <div class="card" style="width: 19rem;">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted font-weight-bold">{{'T.ID' | translate}}: {{ item._id }}</h6>
+          <p class="card-text">{{'Amount' | translate}} : {{ item.amount | currency }}</p>
+          <p class="card-text">{{'Payment Method' | translate}}: {{ item.method }} </p>
+          <p class="card-text">{{'Action2' | translate}}: {{ item.action }} </p>
+          <p class="card-text">{{'Time'  |translate}} : {{ item.time | date }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="mt-5">
+  <h4 class="text-center text-muted text-capitalize">{{'all orders for client'| translate}}</h4>
+  <div class="border p-3 mb-5" *ngFor="let item2 of singleClient.CommingOrders">
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Order ID</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{ item2.order._id }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Location</label>
+      </div>
+      <div class="col-md-8">
+        <a href="https://maps.google.com/?q={{ item2.order.location.coordinates[1] }},{{ item2.order.location.coordinates[0] }}" target="_blank">{{ item2.order.locationDetails.name }}, {{ item2.order.locationDetails.stringAdress }}</a>
+        <span class="ml-5">Another Phone : {{ item2.order.locationDetails.mobile2 }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Pay</label>
+      </div>
+      <div class="col-md-8">
+          <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item2.order.pay"></i>
+          <i class="fas fa-times text-danger" *ngIf="item2.order.pay == false"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Products</label>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let item3 of item2.order.products">
+            <ul class="list-group">
+              <li class="list-group-item active" style="font-size: 15px;">{{ item3._id }}</li>
+              <li class="list-group-item" style="font-size: 13px;">ID : {{ item3.product._id }}</li>
+              <li class="list-group-item">{{ item3.product.name_en }}</li>
+              <li class="list-group-item">{{ item3.product.name_ar }}</li>
+              <li class="list-group-item font-weight-bold">{{ item3.amount }} {{ item3.unit }}</li>
+              <li class="list-group-item">
+                <img src="https://banana-api-1.herokuapp.com/{{ item3.product.imageUrl }}" class="img-thumbnail" alt="">
+              </li>
+            </ul>
+            <span>Arrive at : {{ item2.order.arriveDate | date }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Seller Info</label>
+      </div>
+      <div class="col-md-8">
+        <a href="/seller/singleSeller/{{ item2.seller._id }}">{{ item2.seller.name }}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Delivery</label>
+      </div>
+      <div class="col-md-8">
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item2.banana_delivery"></i>
+        <i class="fas fa-times text-danger" *ngIf="item2.banana_delivery == false"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Price</label>
+      </div>
+      <div class="col-md-8">
+        <span>{{ item2.price }}</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <label class="text-muted font-weight-bold mr-5">Offer Prodcuts</label>
+      </div>
+      <div class="col-md-8" >
+        <div class="row">
+          <div class="col-md-4" *ngFor="let item4 of item2.offerProducts">
+            <ul class="list-group">
+              <li class="list-group-item active">{{ item4._id}}</li>
+              <li class="list-group-item" style="font-size: 14px;">Cart-Item: {{ item4.cartItem }}</li>
+              <li class="list-group-item">{{item4.amount }} {{ item4.unit }}</li>
+              <li class="list-group-item" style="font-size: 14px;">Product ID : {{ item4.product }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

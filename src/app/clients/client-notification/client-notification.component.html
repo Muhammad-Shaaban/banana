@@ -1,0 +1,31 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'send notification' | translate}}</h1><hr>
+<section class="container">
+  <form #form="ngForm" autocomplete="off" (submit)="sendNotifi()">
+
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="formData.title_en" #title_en="ngModel" name="title_en" placeholder="Title EN">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="formData.title_ar" #title_ar="ngModel" name="title_ar" placeholder="Title AR">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="formData.title_urdu" #title_urdu="ngModel" name="title_urdu" placeholder="Title Urdu">
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control" rows="6" [(ngModel)]="formData.body_en" #body_en="ngModel" name="body_en" placeholder="Body content EN"></textarea>
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control" rows="6" [(ngModel)]="formData.body_ar" #body_ar="ngModel" name="body_ar" placeholder="Body content AR"></textarea>
+    </div>
+
+    <div class="form-group">
+      <textarea class="form-control" rows="6" [(ngModel)]="formData.body_urdu" #body_ar="ngModel" name="body_urdu" placeholder="Body content Urdu"></textarea>
+    </div>
+
+    <input type="submit" value="Send Notification" class="btn btn-success">
+  </form>
+</section>

@@ -1,0 +1,77 @@
+
+
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<section class="admin-container container">
+  <h1 class="text-center text-muted text-capitalize font-weight-bold mb-4">{{ 'NavbarTitle' | translate }}</h1>
+   <div class="row">
+       <div class="col-md-6">
+           <div class="content">
+               <div class="row">
+                   <div class="col">
+                       <p class="text-center text-capitalize">{{ 'total products' | translate }}</p>
+                       <p class="text-center font-weight-bold mt-4">{{ totalProds }}<span>/ {{ 'Product' | translate }}</span></p>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+      <div class="col-md-6">
+        <div class="content">
+          <div class="row">
+              <div class="col">
+                  <p class="text-center text-capitalize">{{ 'total issues' | translate }}</p>
+                  <p class="text-center font-weight-bold mt-4">{{ totalIssues }}</p>
+              </div>
+          </div>
+      </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="content">
+          <div class="row">
+              <div class="col">
+                  <p class="text-center text-capitalize">{{ 'total avilable orders' | translate }}</p>
+                  <p class="text-center font-weight-bold mt-4">{{ totalOrderavilables }}</p>
+              </div>
+          </div>
+      </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="content">
+          <div class="row">
+              <div class="col">
+                  <p class="text-center text-capitalize">{{ 'total orders' | translate }}</p>
+                  <p class="text-center font-weight-bold mt-4">{{ totalOrders }}</p>
+              </div>
+          </div>
+      </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="content">
+          <div class="row">
+              <div class="col">
+                  <p class="text-center text-capitalize">{{ 'total seller notavilable' | translate }}</p>
+                  <p class="text-center font-weight-bold mt-4">{{ totalSeller }}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6">
+        <div class="content">
+          <div class="row">
+              <div class="col">
+                  <p class="text-center text-capitalize">{{ 'total Revenue' | translate }}</p>
+                  <p class="text-center font-weight-bold mt-4">{{ totalRev }}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+   </div>
+</section>

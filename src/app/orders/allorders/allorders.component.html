@@ -1,0 +1,92 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'all orders' | translate}}</h1><hr>
+
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<form #form="ngForm" (submit)="submitFilter(form)">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <select class="form-control"  name="filterType" #filterType="ngModel" (change)="selectChangeFilter(filterType)" [(ngModel)]="service.filterType" >
+          <option value="-1" disabled selected>Choose Order Type :-</option>
+          <option value="started">started</option>
+          <option value="cancel">cancel</option>
+          <option value="ended">ended</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3 mt-2" [hidden]="showOrHideFilter">
+      <div class="form-group" >
+        <label class="mr-1">Arrived</label>
+        <input type="checkbox"  [disabled]="cancel.value" [(ngModel)]="service.arrived" #arrived="ngModel" name="arrived">
+      </div>
+    </div>
+    <div class="col-md-3 mt-2" [hidden]="showOrHideFilter">
+      <div class="form-group">
+        <label class="mr-1">Canceled</label>
+       <input type="checkbox" [disabled]="arrived.value" [(ngModel)]="service.cancel"  #cancel="ngModel" name="cancel">
+      </div>
+    </div>
+    <div class="col-md-3 mt-2" [hidden]="showOrHideFilter">
+      <div class="form-group">
+        <label class="mr-1">Delivery</label>
+       <input type="checkbox" [(ngModel)]="service.delivery" #delivery="ngModel" name="delivery">
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-6" [hidden]="showOrHideFilter">
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="service.PayM" #PayM="ngModel" name="PayM">
+          <option value="-1" disabled selected>Choose Payment Method :-</option>
+          <option value="visa">visa</option>
+          <option value="cash">cash</option>
+          <option value="wallet">wallet</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-success ml-auto btn-block font-weight-bold mb-3">Filter</button>
+    </div>
+  </div>
+</form>
+
+<table class="table">
+  <thead class="thead-dark">
+    <th>Client</th>
+    <th>Pay</th>
+    <th>Amount</th>
+    <th># of Products</th>
+    <th>Arrived At</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of allOrders" style="cursor: pointer;" (click)="singleOrder(item._id)">
+      <td>{{ item.client.name }}</td>
+      <td>
+        <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item.pay"></i>
+        <i class="fas fa-times text-danger" *ngIf="!item.pay"></i>
+      </td>
+      <td>{{ item.amount_count }}</td>
+      <td>{{ item.products.length }}</td>
+      <td>{{ item.arriveDate | date }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul class="pagination justify-content-center">
+  <li class="page-item">
+    <button class="page-link" (click) = "goPrev()" [disabled]="service.pageNumber <= 1">{{ 'Previous' | translate}}</button>
+  </li>
+
+  <li class="page-item" *ngFor="let page of paginationGenerate(totalPages)">
+    <button class="page-link" (click)="getNextPage(page)">{{ page }}</button>
+  </li>
+
+  <li class="page-item" *ngIf="showNextandPrev">
+    <span class="page-link">...</span>
+  </li>
+
+  <li class="page-item">
+    <button class="page-link" (click)="goNext()" [disabled]="service.pageNumber >= totalPages">{{ 'Next' | translate}}</button>
+  </li>
+</ul>

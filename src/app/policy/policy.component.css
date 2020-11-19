@@ -1,0 +1,6 @@
+form{
+  margin: 5% auto;
+  width: 70%;
+}
+
+form textarea{height: 200px;margin-bottom: 5%;}

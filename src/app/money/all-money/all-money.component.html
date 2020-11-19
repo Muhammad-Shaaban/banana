@@ -1,0 +1,136 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'all pulled money' | translate}}</h1><hr>
+
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<section class="container">
+  <button class="btn btn-outline-success d-block ml-auto mt-3 mb-5" (click)="goToDelivery()">{{'Banana Delivery' | translate}}</button>
+  <div class="row">
+    <div class="col-md-12 p-3 border mb-4" *ngFor="let item of allPulledMoney">
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">State</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.state }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Pulled Money.ID</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item._id }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Seller Name</label>
+        </div>
+        <div class="col-md-8">
+          <a routerLink="/seller/singleSeller/{{ item.seller._id }}">{{ item.seller.name }}</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Phone Number</label>
+        </div>
+        <div class="col-md-8">
+          <span><span class="font-weight-bold">+{{ item.seller.code }} </span>{{ item.seller.mobile }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Wallet</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.seller.wallet }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Amount</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.amount }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Full Name</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.fullName }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Bank Account</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.banckAccount }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">IBAN</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.IBAN }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Bank Name</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.banckName }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Created At</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.createdAt | date }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Updated At</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.updatedAt | date }}</span>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col">
+          <button class="btn btn-success" (click)="acceptPulledMoney(item._id)">Accept Pull Money</button>
+        </div>
+        <div class="col">
+          <button class="btn btn-danger" (click)="refusePulledMoney(item._id)">Refuse Pull Money</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<ul class="pagination justify-content-center">
+  <li class="page-item">
+    <button class="page-link" (click) = "goPrev()" [disabled]="service.pageNumber <= 1">{{ 'Previous' | translate}}</button>
+  </li>
+
+  <li class="page-item" *ngFor="let page of paginationGenerate(totalPages)">
+    <button class="page-link" (click)="getNextPage(page)">{{ page }}</button>
+  </li>
+
+  <li class="page-item" *ngIf="showNextandPrev">
+    <span class="page-link">...</span>
+  </li>
+
+  <li class="page-item">
+    <button class="page-link" (click)="goNext()" [disabled]="service.pageNumber >= totalPages">{{ 'Next' | translate}}</button>
+  </li>
+</ul>
+

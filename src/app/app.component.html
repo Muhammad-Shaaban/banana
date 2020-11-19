@@ -1,0 +1,68 @@
+ <!-- Navbar -->
+<section class="sideNav">
+  <i class="fas fas fa-cog " *ngIf="token !== null"></i>
+  <a routerLink="/main" class="navbar-brand mr-4 text-white font-weight-bold d-block" style="font-size: 20px;">{{ 'Admin Dashboard' | translate }}</a>
+  <ul class="navbar-nav">
+    <li class="navbar-item">
+      <a routerLink="products/allProducts" class="nav-link">{{'Products' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/clients/allClients" class="nav-link">{{'Clients' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+        <a routerLink="/seller/allSeller" class="nav-link">{{'Sellers' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/certificate/allCertificate" class="nav-link">{{'Certificates' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/policy" class="nav-link">{{'Policy' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/conditions" class="nav-link">{{'Conditions' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/issues/all-issues" class="nav-link">{{'Issues' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/orders/all-orders" class="nav-link">{{'Orders' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/money/all-money" class="nav-link">{{'Pulled Money' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/money/delivery" class="nav-link">{{'Delivery' | translate}}</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/notification" class="nav-link">{{'Notification' | translate}}</a>
+    </li>
+  </ul>
+
+  <!--Authentication and User Interactions -->
+      <ul class="navbar-nav ml-auto">
+          <li class="navbar-item dropdown">
+              <a href="" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="ml-2">{{ email }}</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <button class="dropdown-item" style="cursor: pointer;" (click)="logout()">{{'Logout' | translate}}</button>
+              </div>
+          </li>
+      </ul>
+
+
+      <!-- Multi languages -->
+      <ul class="navbar-nav ml-auto" style="margin-left: 0 !important;" >
+        <li class="navbar-item dropdown">
+            <a href="" class="nav-link " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-globe" title="Change Language" data-toggle="tooltip" data-placement="top"></i>
+            </a>
+            <div class="dropdown-menu" style="min-width: 2rem !important;" aria-labelledby="navbarDropdown">
+                <button class="dropdown-item" style="cursor: pointer;" (click)="switchLang('en')">EN</button>
+                <button class="dropdown-item" style="cursor: pointer;" (click)="switchLang('ar')">AR</button>
+            </div>
+        </li>
+    </ul>
+</section>
+
+<router-outlet></router-outlet>

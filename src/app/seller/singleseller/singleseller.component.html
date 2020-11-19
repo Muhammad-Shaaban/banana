@@ -1,0 +1,164 @@
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+
+<div class="row">
+  <!-- User Information -->
+  <div class="col-md-6 mt-4 mb-5">
+    <h5 class="h3 text-muted text-capitalize mb-4">{{'seller information' | translate}}</h5>
+    <div class="card" style="width: 25rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{ sellerInfo.seller.name }}</h5>
+        <p class="card-text">
+          <span class="d-block mb-2">{{'Categories' | translate}}</span>
+          <li class="text-muted" *ngFor="let item of sellerInfo.seller.category">{{ item }}</li>
+          <span class="text-muted">{{'Address' | translate}}: {{ sellerInfo.seller.certificate.StringAdress }}</span><br>
+          <span class="text-muted">{{'Avilable' | translate}} {{'from' | translate}} <span class="font-weight-bold">{{ sellerInfo.seller.certificate.avilable.from | date: 'h:MM a' }}</span> {{'to' | translate}} <span class="font-weight-bold">{{ sellerInfo.seller.certificate.avilable.to | date: 'h:MM a' }}</span></span>
+          <span class="d-block mb-2">{{'verfication' | translate}} : {{ sellerInfo.seller.verfication }}</span>
+          <span class="d-block mb-2">{{'Wallet' | translate}} : {{ sellerInfo.seller.wallet }}</span>
+          <span class="d-block mb-2">{{'Binding Wallet' | translate}} : {{ sellerInfo.seller.bindingWallet }}</span>
+          <span class="d-block mb-2">{{'Rate' | translate}} : {{ sellerInfo.seller.rate }}</span>
+          <span class="d-block mb-2">{{'Email' | translate}} : {{ sellerInfo.seller.email }}</span>
+          <span class="d-block mb-2">{{'Phone Number' | translate}} : {{ sellerInfo.seller.mobile }}</span>
+        </p>
+        <a class="card-link" target="_blank" href="https://maps.google.com/?q={{sellerInfo.seller.certificate.location.coordinates[1]}},{{sellerInfo.seller.certificate.location.coordinates[0]}}" target="_blank">{{'Location' | translate}}</a>
+      </div>
+    </div>
+
+    <!--<button type="button" class="btn btn-primary font-weight-bold mt-3 ml-1" (click)="sendNotifiy(sellerInfo.seller._id)">Send Notification</button>-->
+  </div>
+
+
+  <!-- Certificate Information -->
+  <div class="col-md-5 mt-4 mb-5">
+    <h5 class="h3 text-muted text-capitalize mb-4">{{'certificate information' | translate}}</h5>
+    <div class="card" style="width: 25rem;">
+      <img *ngFor="let item of sellerInfo.seller.certificate.image" class="mb-3" width="200" height="200" src="https://banana-api-1.herokuapp.com/{{ item }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">
+          <span class="text-muted">{{'Expired At' | translate}} : {{ sellerInfo.seller.certificate.expiresAt | date }}</span><br>
+          <span class="text-muted">{{'state' | translate}}: {{ sellerInfo.seller.certificate.state }}</span><br>
+        </p>
+        <a href="https://maps.google.com/?q={{ sellerInfo.seller.certificate.location.coordinates[1] }},{{ sellerInfo.seller.certificate.location.coordinates[0] }}" target="_blank" class="card-link">{{'Location' | translate}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Arrived Offers -->
+<section class="mt-5">
+  <h4 class="text-muted text-capitalize text-center mt-3 mb-2">{{'arrived offers' | translate}}</h4>
+  <div class="row">
+    <div class="col-md-12 p-4 border mb-5" *ngFor="let item of sellerInfo.arrivedOffers">
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Arrived Offer ID</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item._id }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Location</label>
+        </div>
+        <div class="col-md-8">
+          <a href="https://maps.google.com/?q={{ item.order.location.coordinates[0] }},{{ item.order.location.coordinates[1] }}" target="_blank">{{ item.order.locationDetails.name }}, {{ item.order.locationDetails.stringAdress }}</a>
+          <span class="ml-5">Another Phone :  {{ item.order.locationDetails.mobile2 }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Categories</label>
+        </div>
+        <div class="col-md-8">
+          <span *ngFor="let cat of item.order.category">{{ cat }}, </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Order ID</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.order._id }}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Products</label>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-4" *ngFor="let item2 of item.order.products">
+              <ul class="list-group">
+                <li class="list-group-item active" style="font-size: 14px;">Product ID: {{ item2.product._id }}</li>
+                <li class="list-group-item">{{ item2.product.category }}</li>
+                <li class="list-group-item">{{ item2.product.name_en }}</li>
+                <li class="list-group-item">{{ item2.product.name_ar }}</li>
+                <li class="list-group-item">{{ item2.amount }} {{ item2.unit }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Client ID</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.client }}</span>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Delivery</label>
+        </div>
+        <div class="col-md-8">
+          <i class="fas fa-check" style="color: #1ABC9C;" *ngIf="item.banana_delivery"></i>
+          <i class="fas fa-times text-danger" *ngIf="item.banana_delivery == false"></i>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Price</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ item.price }}</span>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">offerProducts</label>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-4" *ngFor="let item3 of item.offerProducts">
+              <ul class="list-group">
+                <li class="list-group-item active" style="font-size: 13px;">Offer Pro.ID {{ item3._id }}</li>
+                <li class="list-group-item" style="font-size: 13px;">Cart Item {{ item3.cartItem }}</li>
+                <li class="list-group-item"  style="font-size: 13px;">Prod.ID :  {{ item3.product }}</li>
+                <li class="list-group-item">{{ item3.amount }} {{ item3.unit }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Payment Method -->
+<section class="mt-5">
+  <h4 class="text-muted text-center text-capitalize mt-3 mb-5">{{'payment method' | translate}}</h4>
+  <div class="row">
+    <div class="col-md-3 mb-3" *ngFor="let item of sellerInfo.payMethods">
+      <ul class="list-group">
+        <li class="list-group-item active" style="font-size: 14px;">P.Method ID : {{ item._id }}</li>
+        <li class="list-group-item" style="font-size: 14px;">P.Method : {{ item.method }}</li>
+        <li class="list-group-item" style="font-size: 14px;">Offer ID : {{ item.offer }}</li>
+
+      </ul>
+    </div>
+  </div>
+</section>

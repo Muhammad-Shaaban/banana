@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form #form = "ngForm" autocomplete="off" style="margin: 15% auto;" (submit)="onSubmit(form)">
+        <h2 class="text-muted text-center mb-3">Welcome to <span class="font-weight-bold text-capitalize">banana dashboard</span></h2><hr class="mb-5">
+        <div class="form-group mb-4">
+          <input class="form-control" name="email" #email = "ngModel" [(ngModel)] = "formInputs.email" placeholder="Email" required/>
+        </div>
+        <div class="form-group mb-3">
+          <input type="password" class="form-control" name="password" #password = "ngModel" [(ngModel)] = "formInputs.password" placeholder="Password" required/>
+        </div>
+
+        <button type="submit" class="btn btn-green" [disabled]="form.invalid"><i class="fas fa-sign-in-alt mr-2"></i> {{'Login' | translate}}</button>
+      </form>
+    </div>
+  </div>
+</div>

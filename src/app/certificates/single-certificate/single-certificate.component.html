@@ -1,0 +1,131 @@
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<div class="row">
+  <div class="col">
+    <h3 class="text-center text-capitalize mb-3 text-muted">{{'Certificate information' | translate}}</h3>
+    <section class="singleCerti border p-3">
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Certificate Owner : </label>
+          </div>
+          <div class="col-md-8">
+            <span>{{ certificateInfo.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Phone Number : </label>
+          </div>
+          <div class="col-md-8">
+            <span>{{ certificateInfo.mobile }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Email : </label>
+          </div>
+          <div class="col-md-8">
+            <span>{{ certificateInfo.email }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Address : </label>
+          </div>
+          <div class="col-md-8">
+            <span>{{ certificateInfo.certificate.StringAdress }}</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Categories : </label>
+          </div>
+          <div class="col-md-8">
+            <ul>
+             <li *ngFor="let item of certificateInfo.category">{{ item }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Avilable : </label>
+          </div>
+          <div class="col-md-8">
+            <span>{{ certificateInfo.certificate.avilable.from | date }} to {{ certificateInfo.certificate.avilable.to | date }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Expired At : </label>
+          </div>
+          <div class="col-md-8">
+            <span>{{ certificateInfo.certificate.expiresAt | date }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">State : </label>
+          </div>
+          <div class="col-md-8">
+            <span>{{ certificateInfo.certificate.state }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Location : </label>
+          </div>
+          <div class="col-md-8">
+            <a target="_blank" href="https://maps.google.com/?q={{ certificateInfo.certificate.location.coordinates[1] }},{{ certificateInfo.certificate.location.coordinates[0] }}">Location</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="text-muted font-weight-bold mr-5">Image(s) : </label>
+          </div>
+          <div class="col-md-8">
+            <img *ngFor="let item of certificateInfo.certificate.image" src="https://banana-api-1.herokuapp.com/{{ item }}" class="img-thumbnail" width="200" height="200" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="button" class="btn btn-success" (click)="approve(certificateInfo._id)" >Approve</button>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-danger" (click)="disApprove(certificateInfo._id)">Disapprove</button>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>

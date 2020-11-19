@@ -1,0 +1,161 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'visa report' | translate}}</h1><hr>
+
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+<section class="container">
+  <div class="row">
+    <div class="col p-4 border">
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">ID</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.id }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Payment Type</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.paymentType }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Payment Brand</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.paymentBrand }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Amount</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.amount }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Currency</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.currency }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Descriptor</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.descriptor }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Result Code</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.result.code }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Result Description</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.result.description }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Result Details</label>
+        </div>
+        <div class="col-md-8">
+          <span>RiskStatusCode:  {{ reportInfo.resultDetails.RiskStatusCode }}</span><br>
+          <span>ResponseCode:  {{ reportInfo.resultDetails.RiskStatusCode }}</span><br>
+          <span>RequestId:  {{ reportInfo.resultDetails.RequestId }}</span>br
+          <span>RiskResponseCode:  {{ reportInfo.resultDetails.RiskResponseCode }}</span><br>
+          <span>action:  {{ reportInfo.resultDetails.action }}</span><br>
+          <span>OrderId:  {{ reportInfo.resultDetails.OrderId }}</span><br>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Card Information</label>
+        </div>
+        <div class="col-md-8">
+          <span>Bin:  {{ reportInfo.card.bin }}</span><br>
+          <span>BinCountry:  {{ reportInfo.card.binCountry }}</span><br>
+          <span>Last4Digits:  {{ reportInfo.card.last4Digits }}</span><br>
+          <span>Holder:  {{ reportInfo.card.holder }}</span><br>
+          <span>ExpiryMonth:  {{ reportInfo.card.expiryMonth }}</span><br>
+          <span>ExpiryYear:  {{ reportInfo.card.expiryYear }}</span><br>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Customer Information</label>
+        </div>
+        <div class="col-md-8">
+          <span>IP:  {{ reportInfo.customer.ip }}</span><br>
+          <span>IP Country:  {{ reportInfo.customer.ipCountry }}</span><br>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">threeDSecure</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.threeDSecure.eci }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Custom Parameters</label>
+        </div>
+        <div class="col-md-8">
+          <span>SHOPPER_MSDKIntegrationType:  {{ reportInfo.customParameters.SHOPPER_MSDKIntegrationType }}</span><br>
+          <span>SHOPPER_device:  {{ reportInfo.customParameters.SHOPPER_device }}</span><br>
+          <span>CTPE_DESCRIPTOR_TEMPLATE:  {{ reportInfo.customParameters.CTPE_DESCRIPTOR_TEMPLATE }}</span><br>
+          <span>SHOPPER_OS:  {{ reportInfo.customParameters.SHOPPER_OS }}</span><br>
+          <span>SHOPPER_MSDKVersion:  {{ reportInfo.customParameters.SHOPPER_MSDKVersion }}</span><br>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Risk</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.risk.score }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Build Number</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.buildNumber }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">Times Tamp</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.timestamp }}</span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="text-muted font-weight-bold mr-5">ndc</label>
+        </div>
+        <div class="col-md-8">
+          <span>{{ reportInfo.ndc }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
