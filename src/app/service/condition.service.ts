@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ConditionService {
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin';
+  baseUrl = 'https://api.bananas.ae/admin';
 
   constructor(private http: HttpClient) { }
 

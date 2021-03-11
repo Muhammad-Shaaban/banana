@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class MoneyService {
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin/pull/requests';
-  baseUrl2 = 'https://banana-api-1.herokuapp.com/admin/bananaDelivery';
+  baseUrl = 'https://api.bananas.ae/admin/pull/requests';
+  baseUrl2 = 'https://api.bananas.ae/admin/bananaDelivery';
 
   pageNumber = 1;
 
@@ -34,6 +34,6 @@ export class MoneyService {
   }
 
   getPaymentReport(id){
-    return this.http.get('https://banana-api-1.herokuapp.com/admin/pay/report/' + id, {headers: {Authorization: 'hh ' + localStorage.getItem('token')}})
+    return this.http.get('https://api.bananas.ae/admin/pay/report/' + id, {headers: {Authorization: 'hh ' + localStorage.getItem('token')}})
   }
 }

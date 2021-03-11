@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class OrderService {
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin/orders';
+  baseUrl = 'https://api.bananas.ae/admin/orders';
 
   filterType = 'ended';
   arrived = 0;
@@ -24,6 +24,6 @@ export class OrderService {
   }
 
   singleOrder(id){
-    return this.http.get( 'https://banana-api-1.herokuapp.com/admin/order/single/' + id, {headers: {Authorization: 'hh ' + localStorage.getItem('token')}});
+    return this.http.get( 'https://api.bananas.ae/admin/order/single/' + id, {headers: {Authorization: 'hh ' + localStorage.getItem('token')}});
   }
 }

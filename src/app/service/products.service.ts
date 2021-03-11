@@ -17,11 +17,11 @@ export class ProductsService {
   filterSold = 0;
   pageNumber = 1;
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin/products/';
-  singleProdURL = 'https://banana-api-1.herokuapp.com/admin/product/single/';
-  addProdURL = 'https://banana-api-1.herokuapp.com/admin/product';
-  updateProdURL = 'https://banana-api-1.herokuapp.com/admin/product/edit';
-  deleteProdURL = 'https://banana-api-1.herokuapp.com/admin/product/delete';
+  baseUrl = 'https://api.bananas.ae/admin/products/';
+  singleProdURL = 'https://api.bananas.ae/admin/product/single/';
+  addProdURL = 'https://api.bananas.ae/admin/product';
+  updateProdURL = 'https://api.bananas.ae/admin/product/edit';
+  deleteProdURL = 'https://api.bananas.ae/admin/product/delete';
   helper = new JwtHelperService();
 
 
@@ -49,7 +49,7 @@ export class ProductsService {
   }
 
   getStatistecs(){
-    return this.http.get('https://banana-api-1.herokuapp.com/admin/home', {headers: {Authorization: 'hh ' + localStorage.getItem('token')}});
+    return this.http.get('https://api.bananas.ae/admin/home', {headers: {Authorization: 'hh ' + localStorage.getItem('token')}});
   }
 
   addProduct(formData) {

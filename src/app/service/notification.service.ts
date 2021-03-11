@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class NotificationService {
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin/notfications/sendAll';
-  baseUrl2 = 'https://banana-api-1.herokuapp.com/admin/notfications';
+  baseUrl = 'https://api.bananas.ae/admin/notfications/sendAll';
+  baseUrl2 = 'https://api.bananas.ae/admin/notfications';
 
   constructor(private http: HttpClient) { }
 

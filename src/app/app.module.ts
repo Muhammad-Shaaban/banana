@@ -45,6 +45,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { VisaInfoComponent } from './money/visa-info/visa-info.component';
 import { SellerNotificationComponent } from './seller/seller-notification/seller-notification.component';
 import { ClientNotificationComponent } from './clients/client-notification/client-notification.component';
+import { DeliveryAccountComponent } from './delivery-account/delivery-account.component';
+import { AllDeliverAccountsComponent } from './delivery-account/all-deliver-accounts/all-deliver-accounts.component';
+import { CreateDeliveryAccountComponent } from './delivery-account/create-delivery-account/create-delivery-account.component';
 
 
 
@@ -82,7 +85,10 @@ import { ClientNotificationComponent } from './clients/client-notification/clien
     NotificationComponent,
     VisaInfoComponent,
     SellerNotificationComponent,
-    ClientNotificationComponent
+    ClientNotificationComponent,
+    DeliveryAccountComponent,
+    AllDeliverAccountsComponent,
+    CreateDeliveryAccountComponent
   ],
   imports: [
     BrowserModule,

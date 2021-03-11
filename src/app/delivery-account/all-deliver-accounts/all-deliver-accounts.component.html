@@ -1,0 +1,50 @@
+<h1 class="text-center text-muted text-capitalize mb-3">{{'all delivery accounts' | translate}}</h1><hr>
+
+<div class="lds-default" *ngIf="showOrHide"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+
+<table class="table" style="margin-top: 2%;">
+  <thead class="thead-dark">
+    <th>{{'Name' | translate}}</th>
+    <th>{{'Email' | translate}}</th>
+    <th>{{'Phone Number' | translate}}</th>
+    <th>{{ 'Blocked' | translate}}</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of allDeliveryAccount" >
+      <td>{{ item.name }}</td>
+      <td>{{ item.email }}</td>
+      <td> <span class="font-weight-bold">{{ item.code }}</span> {{ item.mobile }}</td><!--{{ item.mobile }}-->
+
+
+      <td>
+        <p type="button" class="text-danger font-weight-bold" *ngIf="item.blocked == false; else unblockuser"><i class="fas fa-times"></i></p>
+
+        <ng-template #unblockuser>
+          <p type="button" class="text-success font-weight-bold"><i class="fas fa-check"></i></p>
+        </ng-template>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" (click)="createNewAccountDel()" class="btn btn-success font-weight-bold">{{ 'Create New Delivey' | translate}}</button>
+
+<!--Pagination-->
+<ul class="pagination justify-content-center">
+<li class="page-item">
+  <button class="page-link" (click) = "goPrev()" [disabled]="service.pageNumber <= 1">{{ 'Previous' | translate}}</button>
+</li>
+
+<li class="page-item" *ngFor="let page of paginationGenerate(totalPages)">
+  <button class="page-link" (click)="getNextPage(page)">{{ page }}</button>
+</li>
+
+<li class="page-item" *ngIf="showNextandPrev">
+  <span class="page-link">...</span>
+</li>
+
+<li class="page-item">
+  <button class="page-link" (click)="goNext()" [disabled]="service.pageNumber >= totalPages">{{ 'Next' | translate}}</button>
+</li>
+</ul>

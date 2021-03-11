@@ -8,7 +8,7 @@ export class CertificateService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin/seller';
+  baseUrl = 'https://api.bananas.ae/admin/seller';
 
   getAllCertificate() {
     return this.http.get(this.baseUrl + '/Certificates?page=1', {headers: {Authorization: 'hh ' + localStorage.getItem('token')}});

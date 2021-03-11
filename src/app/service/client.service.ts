@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ClientService {
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin';
+  baseUrl = 'https://api.bananas.ae/admin';
   searchPageNumber = 1;
   searchQuery = '';
 

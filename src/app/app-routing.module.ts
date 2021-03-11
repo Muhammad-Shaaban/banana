@@ -31,6 +31,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { VisaInfoComponent } from './money/visa-info/visa-info.component';
 import { SellerNotificationComponent } from './seller/seller-notification/seller-notification.component';
 import { ClientNotificationComponent } from './clients/client-notification/client-notification.component';
+import { DeliveryAccountComponent } from './delivery-account/delivery-account.component';
+import { AllDeliverAccountsComponent } from './delivery-account/all-deliver-accounts/all-deliver-accounts.component';
+import { CreateDeliveryAccountComponent } from './delivery-account/create-delivery-account/create-delivery-account.component';
 
 
 const routes: Routes = [
@@ -87,7 +90,13 @@ const routes: Routes = [
       {path: 'visa-report/:id', component: VisaInfoComponent}
   ]},
 
-  {path: 'notification', component: NotificationComponent, pathMatch: 'full'}
+  {path: 'notification', component: NotificationComponent, pathMatch: 'full'},
+  {path: 'deliveryAccount', component: DeliveryAccountComponent,
+    children: [
+      {path: 'all-delievry-account', component: AllDeliverAccountsComponent, pathMatch: 'full'},
+      {path: 'create-delivery-account', component: CreateDeliveryAccountComponent, pathMatch: 'full'}
+    ]
+  }
 ];
 
 @NgModule({

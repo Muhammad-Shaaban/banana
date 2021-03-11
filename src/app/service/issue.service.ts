@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class IssueService {
 
-  baseUrl = 'https://banana-api-1.herokuapp.com/admin/support/issues';
+  baseUrl = 'https://api.bananas.ae/admin/support/issues';
   filterType = 'ok';
   reasonID = '';
 
