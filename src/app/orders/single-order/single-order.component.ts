@@ -22,6 +22,7 @@ export class SingleOrderComponent implements OnInit {
 
     this.service.singleOrder(this.orderID).subscribe(
       (res: any) => {
+        console.log(res);
         this.orderInfo = res.order;
         this.selectedOfferInfo = res.selectedOffer;
         this.paymentInfo = res.payMent;
